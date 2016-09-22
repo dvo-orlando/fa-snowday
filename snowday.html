@@ -1,0 +1,92 @@
+<html>
+	<head>
+	<style>
+		body{
+			background-color: #283d66;
+			color: white
+		}
+
+		h1{
+			background-color: #071832;
+			color: white
+
+		}
+
+		h2{
+			background-color: #071832;
+			color: white
+
+		}
+
+		p{
+			background-color: #071832;
+			color: white
+
+		}
+
+		footer {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			padding: 1rem;
+			background-color: #283d66;
+			text-align: center;
+			}
+
+			.info{
+				background-color: #071832
+			}
+	</style>
+
+	</head>
+	<body>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script>
+			jQuery(document).ready(function($) {
+			$.ajax({
+				url : "http://api.wunderground.com/api/7fa6b2ae040f426e/geolookup/conditions/q/ME/Fryeburg.json",
+				dataType : "jsonp",
+				success : function(parsed_json) {
+						var fulljson = parsed_json
+						var location = parsed_json['location']['city'];
+						var temp_f = parsed_json['current_observation']['temp_f'];
+						var humidity = parsed_json['current_observation']['relative_humidity'];
+
+						var iconurl = parsed_json['current_observation']['icon_url']
+
+						console.log(fulljson);
+
+						document.getElementById("icon").src = (iconurl)
+						document.getElementById("temperature").innerHTML = ("Current temperature: " + temp_f);
+						document.getElementById("humidity").innerHTML = ("Relative Humidity: " + humidity);
+					}
+				});
+			});
+		</script>
+
+	<div align="center">
+
+		<h1> Fryeburg Academy <br> Unofficial Snow Day Calculator</h1>
+
+	</div>
+
+	<div class='info'>
+		<h2> Weather Data </h2>
+
+			<img id="icon" src="#">
+			<p id="temperature"> NO DATA AVAILABLE </p>
+			<p id="humidity"> NO DATA AVAILABLE </p>
+	</div>
+
+
+
+
+
+
+	</body>
+	<footer>
+	<p>Created by Dominic Orlando <br> A project for New Media Class, Fryeburg Academy</p>
+</footer>
+</html>
