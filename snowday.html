@@ -1,28 +1,26 @@
 <html>
-	<head>
+
+<head>
 	<style>
 		body{
 			background-color: #283d66;
 			color: white
-		}
+			}
 
 		h1{
 			background-color: #071832;
 			color: white
-
-		}
+			}
 
 		h2{
 			background-color: #071832;
 			color: white
-
-		}
+			}
 
 		p{
 			background-color: #071832;
 			color: white
-
-		}
+			}
 
 		footer {
 			position: absolute;
@@ -37,34 +35,89 @@
 			.info{
 				background-color: #071832
 			}
-	</style>
 
-	</head>
-	<body>
+			#main {
+				float:left;
+				width:500px;
+				background:#9c9;
+			}
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+			#sidebar {
+				float:right;
+				width:250px;
+				background: #071832;
+
+				border-style: solid
+				border: 2px;
+				border-color: red;
+			}
+		</style>
+
+</head>
+
+<body>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
 		<script>
+
+			//OBSERVATION DATA
 			jQuery(document).ready(function($) {
-			$.ajax({
-				url : "http://api.wunderground.com/api/7fa6b2ae040f426e/geolookup/conditions/q/ME/Fryeburg.json",
-				dataType : "jsonp",
-				success : function(parsed_json) {
-						var fulljson = parsed_json
-						var location = parsed_json['location']['city'];
-						var temp_f = parsed_json['current_observation']['temp_f'];
-						var humidity = parsed_json['current_observation']['relative_humidity'];
+				$.ajax({
+					url : "http://api.wunderground.com/api/7fa6b2ae040f426e/geolookup/conditions/q/ME/Fryeburg.json",
+					dataType : "jsonp",
+					success : function(parsed_json) {
 
-						var iconurl = parsed_json['current_observation']['icon_url']
+					  // GET DATA
 
+
+							//observation data
+
+							var observationTime = parsed_json['current_observation']['observation_time'];
+							var currentTime = parsed_json['current_observation']['local_time_rfc822'];
+							var stationID = parsed_json['current_observation']['station_id'];
+							var observationLocation = parsed_json['current_observation']['observation_location']['full'];
+
+							//weather data
+							var fulljson = parsed_json
+							var generalWeather = ['current_observation']['weather'];
+							var temp_f = parsed_json['current_observation']['temp_f'];
+							var humidity = parsed_json['current_observation']['relative_humidity'];
+							var iconurl = parsed_json['current_observation']['icon_url'];
+							var dewpoint_f = parsed_json['current_observation']['dewpoint_f'];
+							var feelslike_f = parsed_json['current_observation']['feelslike_f'];
+							var visibility = parsed_json['current_observation']['visibility_mi'];
+							var wind = parsed_json['current_observation']['wind_string'];
+
+						// All Data to Console
 						console.log(fulljson);
 
+						//Assign data to Element
 						document.getElementById("icon").src = (iconurl)
 						document.getElementById("temperature").innerHTML = ("Current temperature: " + temp_f);
 						document.getElementById("humidity").innerHTML = ("Relative Humidity: " + humidity);
 					}
 				});
 			});
-		</script>
+
+			</script>
+
+			<script>
+				//FORECAST DATA
+				jQuery(document).ready(function($) {
+  				$.ajax({
+  					url : "http://api.wunderground.com/api/7fa6b2ae040f426e/hourly/q/ME/Fryeburg.json",
+  					dataType : "jsonp",
+  					success : function(parsed_json) {
+							console.log(parsed_json)
+
+
+
+  				}
+  			});
+			});
+
+			</script>
 
 	<div align="center">
 
@@ -72,21 +125,20 @@
 
 	</div>
 
-	<div class='info'>
-		<h2> Weather Data </h2>
+	<div id="sidebar">
+		<h2> Live Data </h2>
 
 			<img id="icon" src="#">
 			<p id="temperature"> NO DATA AVAILABLE </p>
 			<p id="humidity"> NO DATA AVAILABLE </p>
+
+
 	</div>
 
+</body>
 
-
-
-
-
-	</body>
-	<footer>
+<footer>
 	<p>Created by Dominic Orlando <br> A project for New Media Class, Fryeburg Academy</p>
 </footer>
+
 </html>
