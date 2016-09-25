@@ -53,7 +53,6 @@
 				border-color: red;
 			}
 		</style>
-
 </head>
 
 <body>
@@ -94,9 +93,22 @@
 						console.log(fulljson);
 
 						//Assign data to Element
-						document.getElementById("icon").src = (iconurl)
+
+							//observation
+						document.getElementById("observationTime").innerHTML = ("Observation Time: " + observationTime);
+						document.getElementById("observationLocation").innerHTML = ("Observation Location: " + observationLocation);
+						document.getElementById("currentTime").innerHTML = ("Current Time: " + currentTime);
+						document.getElementById("stationID").innerHTML = ("Station ID: " + stationID);
+							//weather
+						document.getElementById("currentWeather").innerHTML = ("Current Weather: " + generalWeather);
 						document.getElementById("temperature").innerHTML = ("Current temperature: " + temp_f);
 						document.getElementById("humidity").innerHTML = ("Relative Humidity: " + humidity);
+						document.getElementById("icon").src = (iconurl);
+						document.getElementById("dewpoint").innerHTML = ("Dewpoint: " + dewpoint_f);
+						document.getElementById("feelslike").innerHTML = ("Feels Like: " + feelslike_f);
+						document.getElementById("visibility").innerHTML = ("Visibility: " + visibility);
+						document.getElementById("wind").innerHTML = ("Wind: " + wind);
+
 					}
 				});
 			});
@@ -127,11 +139,32 @@
 	</div>
 
 	<div id="sidebar">
-		<h2> Live Data </h2>
+
+		<div align="center">
+		<h1> Live Data </h1>
+		</div>
+
+		<div align="center">
+		<h2> Observation Information </h2>
+		</div>
+
+			<p id="currentTime"> NO DATA AVAILABLE </p>
+			<p id="observationTime"> NO DATA AVAILABLE </p>
+			<p id="observationLocation"> NO DATA AVAILABLE </p>
+			<p id="stationID"> NO DATA AVAILABLE </p>
+
+		<div align="center">
+		<h2> Weather Data </h2>
+		</div>
 
 			<img id="icon" src="#">
+			<p id="currentWeather"> NO DATA AVAILABLE </p>
 			<p id="temperature"> NO DATA AVAILABLE </p>
+			<p id="feelslike"> NO DATA AVAILABLE </p>
 			<p id="humidity"> NO DATA AVAILABLE </p>
+			<p id="dewpoint"> NO DATA AVAILABLE </p>
+			<p id="visibility"> NO DATA AVAILABLE </p>
+			<p id="wind"> NO DATA AVAILABLE </p>
 
 
 	</div>
