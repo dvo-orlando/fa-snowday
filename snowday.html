@@ -80,7 +80,7 @@
 
 							//weather data
 							var fulljson = parsed_json
-							var generalWeather = ['current_observation']['weather'];
+							var generalWeather = parsed_json['current_observation']['weather'];
 							var temp_f = parsed_json['current_observation']['temp_f'];
 							var humidity = parsed_json['current_observation']['relative_humidity'];
 							var iconurl = parsed_json['current_observation']['icon_url'];
