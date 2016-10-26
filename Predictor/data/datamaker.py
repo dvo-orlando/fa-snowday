@@ -1,0 +1,147 @@
+import numpy as np
+import json
+
+#features
+#temperature
+#dewpoint
+#windspead
+#humidity
+#winddirection
+#visibility
+#pressure
+#windchill
+#precipitation
+
+#import any historical json to create array of feature values
+with open('historical_data/20160325.json') as data_file:
+    data = json.load(data_file)
+
+#data['history']['observations'][0]['date']['year'])
+
+X = np.array([
+
+[0,
+ data['history']['observations'][0]['tempm'],
+ data['history']['observations'][0]['dewptm'],
+ data['history']['observations'][0]['hum'],
+ data['history']['observations'][0]['wspdm'],
+ data['history']['observations'][0]['wdird'],
+ data['history']['observations'][0]['vism'],
+ data['history']['observations'][0]['pressurem'],
+ data['history']['observations'][0]['windchillm'],
+ data['history']['observations'][0]['precipm']
+],[1,
+ data['history']['observations'][1]['tempm'],
+ data['history']['observations'][1]['dewptm'],
+ data['history']['observations'][1]['hum'],
+ data['history']['observations'][1]['wspdm'],
+ data['history']['observations'][1]['wdird'],
+ data['history']['observations'][1]['vism'],
+ data['history']['observations'][1]['pressurem'],
+ data['history']['observations'][1]['windchillm'],
+ data['history']['observations'][1]['precipm']
+],[2,
+ data['history']['observations'][2]['tempm'],
+ data['history']['observations'][2]['dewptm'],
+ data['history']['observations'][2]['hum'],
+ data['history']['observations'][2]['wspdm'],
+ data['history']['observations'][2]['wdird'],
+ data['history']['observations'][2]['vism'],
+ data['history']['observations'][2]['pressurem'],
+ data['history']['observations'][2]['windchillm'],
+ data['history']['observations'][2]['precipm']
+],[3,
+ data['history']['observations'][3]['tempm'],
+ data['history']['observations'][3]['dewptm'],
+ data['history']['observations'][3]['hum'],
+ data['history']['observations'][3]['wspdm'],
+ data['history']['observations'][3]['wdird'],
+ data['history']['observations'][3]['vism'],
+ data['history']['observations'][3]['pressurem'],
+ data['history']['observations'][3]['windchillm'],
+ data['history']['observations'][3]['precipm']
+],[4,
+ data['history']['observations'][4]['tempm'],
+ data['history']['observations'][4]['dewptm'],
+ data['history']['observations'][4]['hum'],
+ data['history']['observations'][4]['wspdm'],
+ data['history']['observations'][4]['wdird'],
+ data['history']['observations'][4]['vism'],
+ data['history']['observations'][4]['pressurem'],
+ data['history']['observations'][4]['windchillm'],
+ data['history']['observations'][4]['precipm']
+],[5,
+ data['history']['observations'][5]['tempm'],
+ data['history']['observations'][5]['dewptm'],
+ data['history']['observations'][5]['hum'],
+ data['history']['observations'][5]['wspdm'],
+ data['history']['observations'][5]['wdird'],
+ data['history']['observations'][5]['vism'],
+ data['history']['observations'][5]['pressurem'],
+ data['history']['observations'][5]['windchillm'],
+ data['history']['observations'][5]['precipm']
+],[6,
+ data['history']['observations'][6]['tempm'],
+ data['history']['observations'][6]['dewptm'],
+ data['history']['observations'][6]['hum'],
+ data['history']['observations'][6]['wspdm'],
+ data['history']['observations'][6]['wdird'],
+ data['history']['observations'][6]['vism'],
+ data['history']['observations'][6]['pressurem'],
+ data['history']['observations'][6]['windchillm'],
+ data['history']['observations'][6]['precipm']
+],[7,
+ data['history']['observations'][7]['tempm'],
+ data['history']['observations'][7]['dewptm'],
+ data['history']['observations'][7]['hum'],
+ data['history']['observations'][7]['wspdm'],
+ data['history']['observations'][7]['wdird'],
+ data['history']['observations'][7]['vism'],
+ data['history']['observations'][7]['pressurem'],
+ data['history']['observations'][7]['windchillm'],
+ data['history']['observations'][7]['precipm']
+],[8,
+ data['history']['observations'][8]['tempm'],
+ data['history']['observations'][8]['dewptm'],
+ data['history']['observations'][8]['hum'],
+ data['history']['observations'][8]['wspdm'],
+ data['history']['observations'][8]['wdird'],
+ data['history']['observations'][8]['vism'],
+ data['history']['observations'][8]['pressurem'],
+ data['history']['observations'][8]['windchillm'],
+ data['history']['observations'][8]['precipm']
+],[9,
+ data['history']['observations'][9]['tempm'],
+ data['history']['observations'][9]['dewptm'],
+ data['history']['observations'][9]['hum'],
+ data['history']['observations'][9]['wspdm'],
+ data['history']['observations'][9]['wdird'],
+ data['history']['observations'][9]['vism'],
+ data['history']['observations'][9]['pressurem'],
+ data['history']['observations'][9]['windchillm'],
+ data['history']['observations'][9]['precipm']
+],[10,
+ data['history']['observations'][10]['tempm'],
+ data['history']['observations'][10]['dewptm'],
+ data['history']['observations'][10]['hum'],
+ data['history']['observations'][10]['wspdm'],
+ data['history']['observations'][10]['wdird'],
+ data['history']['observations'][10]['vism'],
+ data['history']['observations'][10]['pressurem'],
+ data['history']['observations'][10]['windchillm'],
+ data['history']['observations'][10]['precipm']
+],[11,
+ data['history']['observations'][11]['tempm'],
+ data['history']['observations'][11]['dewptm'],
+ data['history']['observations'][11]['hum'],
+ data['history']['observations'][11]['wspdm'],
+ data['history']['observations'][11]['wdird'],
+ data['history']['observations'][11]['vism'],
+ data['history']['observations'][11]['pressurem'],
+ data['history']['observations'][11]['windchillm'],
+ data['history']['observations'][11]['precipm']
+]
+
+])
+
+np.save('trainingdata13',X)
