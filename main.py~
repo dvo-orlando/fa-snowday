@@ -68,6 +68,12 @@ if clf.predict(prediction) == [ 0.]:
     yesno = "Tomorrow will not be a snowday."
 if clf.predict(prediction) == [ 1.]:
     yesno = "Tomorrow will be a snowday."
+	
+
+
+
+
+
 
 
 @app.route("/")
