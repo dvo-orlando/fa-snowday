@@ -7,9 +7,9 @@ app = Flask(__name__)
 #predictor
 from sklearn import svm
 import numpy as np
-#import wget
+import wget
 import json
-#import os
+import os
 
 #Load numpy arrays
 X = np.load('data/raw/data.npy')
@@ -22,23 +22,14 @@ y = y.ravel()
 clf = svm.SVC()
 clf.fit(X,y)
 
-#User input to request new data
-# def requestData():
-#     requestData = raw_input("Download New Data? (y/n)")
-# 
-#     if requestData =="y":
-# 
-#         try:
-#             os.remove('current.day')
-#         except OSError:
-#             pass
-# 
-#         url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,minutely,hourly,alerts,flags"
-#         file = wget.download(url, out="current.day")
-#     else:
-#         pass
-# 
-# requestData()
+
+try:
+    os.remove('current.day')
+except OSError:
+    pass
+
+url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,minutely,hourly,alerts,flags"
+file = wget.download(url, out="current.day")
 
 print("")
 
