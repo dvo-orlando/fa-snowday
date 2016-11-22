@@ -1,30 +1,29 @@
-import os
 from flask import Flask
-
-app = Flask(__name__)
-
-
-#predictor
 from sklearn import svm
 import numpy as np
 import wget
 import json
 import os
 
-#Load numpy arrays
-X = np.load('data/raw/data.npy')
-y = np.load('data/raw/index.npy')
-
-#Convert "y" to compatible type
-y = y.ravel()
-
-#Create and fit Support Vector Machine
-clf = svm.SVC()
-clf.fit(X,y)
-
+app = Flask(__name__)
 
 @app.route("/")
 def hello():
+
+    execfile('data/getData.py')
+    execfile('data/processData.py')
+
+    #Load numpy arrays
+    X = np.load('data/processed/data.npy')
+    y = np.load('data/processed/index.npy')
+
+    #Convert "y" to compatible type
+    y = y.ravel()
+
+    #Create and fit Support Vector Machine
+    clf = svm.SVC()
+    clf.fit(X,y)
+
     try:
         os.remove('current.day')
     except OSError:
@@ -55,7 +54,6 @@ def hello():
         prediction[0,11] = data['daily']['data'][dayfrom]['windBearing']
         prediction[0,12] = data['daily']['data'][dayfrom]['visibility']
         prediction[0,13] = data['daily']['data'][dayfrom]['pressure']
-
 
     if clf.predict(prediction) == [ 0.]:
         yesno = "Tomorrow will not be a snowday."
