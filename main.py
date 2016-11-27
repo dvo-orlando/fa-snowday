@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from sklearn import svm
 import numpy as np
 import wget
@@ -21,7 +22,7 @@ def hello():
     y = y.ravel()
 
     #Create and fit Support Vector Machine
-    clf = svm.SVC()
+    clf = svm.SVC(probability=True)
     clf.fit(X,y)
 
     try:
@@ -29,15 +30,14 @@ def hello():
     except OSError:
         pass
 
-    url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,minutely,hourly,alerts,flags"
+    url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,minutely,alerts,flags"
     file = wget.download(url, out="current.day")
 
     print("")
 
-    prediction = np.zeros((1,14))
+    prediction = np.zeros((3,14))
 
-    dayfrom = 1
-
+    dayfrom=1
     with open("current.day") as data_file:
         data = json.load(data_file)
         prediction[0,0] = data['daily']['data'][dayfrom]['moonPhase']
@@ -54,13 +54,13 @@ def hello():
         prediction[0,11] = data['daily']['data'][dayfrom]['windBearing']
         prediction[0,12] = data['daily']['data'][dayfrom]['visibility']
         prediction[0,13] = data['daily']['data'][dayfrom]['pressure']
+#BUILD VARIABLES TO PASS TO TEMPLATE
+    #Percent Snowday for 3 Days
+    resultArr = clf.predict_proba(prediction)
+    final = str(resultArr.item((0,1))*100)
 
-    if clf.predict(prediction) == [ 0.]:
-        yesno = "Tomorrow will not be a snowday."
-    if clf.predict(prediction) == [ 1.]:
-        yesno = "Tomorrow will be a snowday."
-
-    return yesno
+#RENDER TEMPLATE
+    return render_template('index.html', final=final)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
