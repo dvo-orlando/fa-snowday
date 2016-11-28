@@ -18,7 +18,7 @@ def hello():
     X = np.load('data/processed/data.npy')
     y = np.load('data/processed/index.npy')
 
-    #Convert "y" to compatible type
+    #Convert "y" to compatible array
     y = y.ravel()
 
     #Create and fit Support Vector Machine
@@ -35,25 +35,24 @@ def hello():
 
     print("")
 
-    prediction = np.zeros((3,14))
+    prediction = np.zeros((1,13))
 
     dayfrom=1
     with open("current.day") as data_file:
         data = json.load(data_file)
-        prediction[0,0] = data['daily']['data'][dayfrom]['moonPhase']
-        prediction[0,1] = data['daily']['data'][dayfrom]['precipIntensity']
-        prediction[0,2] = data['daily']['data'][dayfrom]['precipIntensityMax']
-        prediction[0,3] = data['daily']['data'][dayfrom]['precipProbability']
-        prediction[0,4] = data['daily']['data'][dayfrom]['temperatureMin']
-        prediction[0,5] = data['daily']['data'][dayfrom]['temperatureMax']
-        prediction[0,6] = data['daily']['data'][dayfrom]['apparentTemperatureMin']
-        prediction[0,7] = data['daily']['data'][dayfrom]['apparentTemperatureMax']
-        prediction[0,8] = data['daily']['data'][dayfrom]['dewPoint']
-        prediction[0,9] = data['daily']['data'][dayfrom]['humidity']
-        prediction[0,10] = data['daily']['data'][dayfrom]['windSpeed']
-        prediction[0,11] = data['daily']['data'][dayfrom]['windBearing']
-        prediction[0,12] = data['daily']['data'][dayfrom]['visibility']
-        prediction[0,13] = data['daily']['data'][dayfrom]['pressure']
+        prediction[0,0] = data['daily']['data'][dayfrom]['precipIntensity']
+        prediction[0,1] = data['daily']['data'][dayfrom]['precipIntensityMax']
+        prediction[0,2] = data['daily']['data'][dayfrom]['precipProbability']
+        prediction[0,3] = data['daily']['data'][dayfrom]['temperatureMin']
+        prediction[0,4] = data['daily']['data'][dayfrom]['temperatureMax']
+        prediction[0,5] = data['daily']['data'][dayfrom]['apparentTemperatureMin']
+        prediction[0,6] = data['daily']['data'][dayfrom]['apparentTemperatureMax']
+        prediction[0,7] = data['daily']['data'][dayfrom]['dewPoint']
+        prediction[0,8] = data['daily']['data'][dayfrom]['humidity']
+        prediction[0,9] = data['daily']['data'][dayfrom]['windSpeed']
+        prediction[0,10] = data['daily']['data'][dayfrom]['windBearing']
+        prediction[0,11] = data['daily']['data'][dayfrom]['visibility']
+        prediction[0,12] = data['daily']['data'][dayfrom]['pressure']
 #BUILD VARIABLES TO PASS TO TEMPLATE
     #Percent Snowday for 3 Days
     resultArr = clf.predict_proba(prediction)
