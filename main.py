@@ -22,7 +22,7 @@ def hello():
     y = y.ravel()
 
     #Create and fit Support Vector Machine
-    clf = svm.SVC(probability=True)
+    clf = svm.SVC(probability=True, kernel='rbf', tol=0.000000000001)
     clf.fit(X,y)
 
     try:
@@ -35,7 +35,7 @@ def hello():
 
     print("")
 
-    prediction = np.zeros((1,5))
+    prediction = np.zeros((1,4))
 
     dayfrom=1
     with open("current.day") as data_file:
@@ -49,14 +49,14 @@ def hello():
         else:
             prediction[0,3] = 0
 
-        if 'precipType' in data['daily']['data'][dayfrom]:
-            precipStr = data['daily']['data'][0]['precipType']
-            if precipStr == 'snow':
-                X[0,4] = 2
-            if precipStr == 'rain':
-                X[0,4] = 1
-        else:
-            X[0,4] = 0
+        # if 'precipType' in data['daily']['data'][dayfrom]:
+        #     precipStr = data['daily']['data'][0]['precipType']
+        #     if precipStr == 'snow':
+        #         X[0,4] = 100
+        #     if precipStr == 'rain':
+        #         X[0,4] = 50
+        # else:
+        #     X[0,4] = 0
 #BUILD VARIABLES TO PASS TO TEMPLATE
     #Percent Snowday for 3 Days
     resultArr = clf.predict_proba(prediction)
