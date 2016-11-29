@@ -22,7 +22,7 @@ def hello():
     y = y.ravel()
 
     #Create and fit Support Vector Machine
-    clf = svm.SVC(probability=True, kernel='rbf', tol=0.000000000001)
+    clf = svm.SVC(probability=True, kernel='rbf', tol=0.001)
     clf.fit(X,y)
 
     try:
@@ -30,10 +30,8 @@ def hello():
     except OSError:
         pass
 
-    url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,minutely,alerts,flags"
+    url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806?exclude=currently,hourly,minutely,alerts,flags"
     file = wget.download(url, out="current.day")
-
-    print("")
 
     prediction = np.zeros((1,4))
 
@@ -49,16 +47,7 @@ def hello():
         else:
             prediction[0,3] = 0
 
-        # if 'precipType' in data['daily']['data'][dayfrom]:
-        #     precipStr = data['daily']['data'][0]['precipType']
-        #     if precipStr == 'snow':
-        #         X[0,4] = 100
-        #     if precipStr == 'rain':
-        #         X[0,4] = 50
-        # else:
-        #     X[0,4] = 0
-#BUILD VARIABLES TO PASS TO TEMPLATE
-    #Percent Snowday for 3 Days
+#ORGANIZE VARIABLES TO PASS TO TEMPLATE
     resultArr = clf.predict_proba(prediction)
     final = str(resultArr.item((0,1))*100)
 

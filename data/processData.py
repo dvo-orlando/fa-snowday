@@ -21,23 +21,19 @@ for subdir, dirs, files in os.walk(rootdir):
             with open(rootdir+file) as data_file:
                 data = json.load(data_file)
 
+                #Minimum Temperature
                 X[row,0] = data['daily']['data'][0]['temperatureMin']
+                #Probability
                 X[row,1] = data['daily']['data'][0]['precipProbability']
+                #Intensity
                 X[row,2] = data['daily']['data'][0]['precipIntensity']
+                #Accumulation
                 if 'precipAccumulation' in data['daily']['data'][0]:
                     X[row,3] = data['daily']['data'][0]['precipAccumulation']
                 else:
                     X[row,3] = 0
 
-                # if 'precipType' in data['daily']['data'][0]:
-                #     precipType = data['daily']['data'][0]['precipType']
-                #     if precipType == 'snow':
-                #         X[row,4] = 100
-                #     if precipType == 'rain':
-                #         X[row,4] = 50
-                # else:
-                #     X[row,4] = 0
-
+                #Build the Index array based on 
                 if file.endswith(".1"):
                     y[row] = 1
                 if file.endswith(".0"):
@@ -45,9 +41,6 @@ for subdir, dirs, files in os.walk(rootdir):
 
 
                 row=row+1
-
-print(X)
-print(y)
 
 np.save("data/processed/data",X)
 np.save("data/processed/index",y)
