@@ -22,7 +22,7 @@ def hello():
     y = y.ravel()
 
     #Create and fit Support Vector Machine
-    clf = svm.SVC(probability=True, kernel='rbf', tol=0.001)
+    clf = svm.SVC(probability=True, kernel='linear', tol=0.001)
     clf.fit(X,y)
 
     try:
