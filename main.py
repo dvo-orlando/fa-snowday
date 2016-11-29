@@ -35,24 +35,28 @@ def hello():
 
     print("")
 
-    prediction = np.zeros((1,13))
+    prediction = np.zeros((1,5))
 
     dayfrom=1
     with open("current.day") as data_file:
         data = json.load(data_file)
-        prediction[0,0] = data['daily']['data'][dayfrom]['precipIntensity']
-        prediction[0,1] = data['daily']['data'][dayfrom]['precipIntensityMax']
-        prediction[0,2] = data['daily']['data'][dayfrom]['precipProbability']
-        prediction[0,3] = data['daily']['data'][dayfrom]['temperatureMin']
-        prediction[0,4] = data['daily']['data'][dayfrom]['temperatureMax']
-        prediction[0,5] = data['daily']['data'][dayfrom]['apparentTemperatureMin']
-        prediction[0,6] = data['daily']['data'][dayfrom]['apparentTemperatureMax']
-        prediction[0,7] = data['daily']['data'][dayfrom]['dewPoint']
-        prediction[0,8] = data['daily']['data'][dayfrom]['humidity']
-        prediction[0,9] = data['daily']['data'][dayfrom]['windSpeed']
-        prediction[0,10] = data['daily']['data'][dayfrom]['windBearing']
-        prediction[0,11] = data['daily']['data'][dayfrom]['visibility']
-        prediction[0,12] = data['daily']['data'][dayfrom]['pressure']
+
+        prediction[0,0] = data['daily']['data'][dayfrom]['temperatureMin']
+        prediction[0,1] = data['daily']['data'][dayfrom]['precipProbability']
+        prediction[0,2] = data['daily']['data'][dayfrom]['precipIntensity']
+        if 'precipAccumulation' in data['daily']['data'][dayfrom]:
+            prediction[0,3] = data['daily']['data'][dayfrom]['precipAccumulation']
+        else:
+            prediction[0,3] = 0
+
+        if 'precipType' in data['daily']['data'][dayfrom]:
+            precipStr = data['daily']['data'][0]['precipType']
+            if precipStr == 'snow':
+                X[0,4] = 2
+            if precipStr == 'rain':
+                X[0,4] = 1
+        else:
+            X[0,4] = 0
 #BUILD VARIABLES TO PASS TO TEMPLATE
     #Percent Snowday for 3 Days
     resultArr = clf.predict_proba(prediction)

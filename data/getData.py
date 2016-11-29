@@ -17,7 +17,7 @@ with open('data/dataset.csv', 'rb') as csvfile:
         #format for url
         dateurl = dt.isoformat('T')
 
-        url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806," + dateurl + "?exclude=currently,minutely,alerts,flags"
+        url = "https://api.darksky.net/forecast/bd882334266c9cbc88d74adff896684a/44.0165,-70.9806," + dateurl + "?exclude=currently,hourly,minutely,alerts,flags"
 
 
         path = "data/raw/" + dt.strftime('%Y-%m-%d') + "." + row[1]
