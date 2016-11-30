@@ -1,4 +1,4 @@
 #fa-snowday
-FA Snow Day Calculator
+Fryeburg Academy Snow Day Calculator
 
 Snowday prediction using machine learning techniques.
