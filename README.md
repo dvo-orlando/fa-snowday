@@ -1,4 +1,4 @@
-# snowday
+#fa-snowday
 FA Snow Day Calculator
 
-https://fa-snowday.herokuapp.com/
+Snowday prediction using machine learning techniques.
