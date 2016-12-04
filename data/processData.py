@@ -33,13 +33,11 @@ for subdir, dirs, files in os.walk(rootdir):
                 else:
                     X[row,3] = 0
 
-                #Build the Index array based on 
+                #Build the Index array based on
                 if file.endswith(".1"):
                     y[row] = 1
                 if file.endswith(".0"):
                     y[row] = 0
-
-
                 row=row+1
 
 np.save("data/processed/data",X)
