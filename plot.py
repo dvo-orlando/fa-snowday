@@ -48,7 +48,7 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 ax.scatter(graphX[:,0], graphX[:,1], graphX[:,3], c=y, marker='o', cmap=cm)
-
+ax.scatter(1,1,1,"green")
 ax.set_xlabel('temp')
 ax.set_ylabel('probability')
 ax.set_zlabel('accum')
